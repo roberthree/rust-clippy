@@ -500,6 +500,7 @@ pub static LINTS: &[&crate::LintInfo] = &[
     crate::methods::WRONG_SELF_CONVENTION_INFO,
     crate::methods::ZST_OFFSET_INFO,
     crate::min_ident_chars::MIN_IDENT_CHARS_INFO,
+    crate::minimal_unsafe_block::MINIMAL_UNSAFE_BLOCK_INFO,
     crate::minmax::MIN_MAX_INFO,
     crate::misc::SHORT_CIRCUIT_STATEMENT_INFO,
     crate::misc::TOPLEVEL_REF_ARG_INFO,

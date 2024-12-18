@@ -5769,6 +5769,7 @@ Released 2018-09-13
 [`mem_replace_with_uninit`]: https://rust-lang.github.io/rust-clippy/master/index.html#mem_replace_with_uninit
 [`min_ident_chars`]: https://rust-lang.github.io/rust-clippy/master/index.html#min_ident_chars
 [`min_max`]: https://rust-lang.github.io/rust-clippy/master/index.html#min_max
+[`minimal_unsafe_block`]: https://rust-lang.github.io/rust-clippy/master/index.html#minimal_unsafe_block
 [`misaligned_transmute`]: https://rust-lang.github.io/rust-clippy/master/index.html#misaligned_transmute
 [`mismatched_target_os`]: https://rust-lang.github.io/rust-clippy/master/index.html#mismatched_target_os
 [`mismatching_type_param_order`]: https://rust-lang.github.io/rust-clippy/master/index.html#mismatching_type_param_order

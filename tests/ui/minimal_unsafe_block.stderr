@@ -1,0 +1,177 @@
+error: this `unsafe` block is not minimal as it covers statements
+  --> tests/ui/minimal_unsafe_block.rs:25:5
+   |
+LL | /     unsafe {
+...  |
+LL | |         let y = x.unwrap_unchecked();
+LL | |     }
+   | |_____^
+   |
+   = note: `-D clippy::minimal-unsafe-block` implied by `-D warnings`
+   = help: to override `-D warnings` add `#[allow(clippy::minimal_unsafe_block)]`
+
+error: used `unwrap_unchecked()` on `Some` value
+  --> tests/ui/minimal_unsafe_block.rs:30:17
+   |
+LL |         let y = x.unwrap_unchecked();
+   |                 ^^^^^^^^^^^^^^^^^^^^
+   |
+help: remove the `Some` and `unwrap_unchecked()`
+  --> tests/ui/minimal_unsafe_block.rs:29:17
+   |
+LL |         let x = Some(true);
+   |                 ^^^^^^^^^^
+   = note: `-D clippy::unnecessary-literal-unwrap` implied by `-D warnings`
+   = help: to override `-D warnings` add `#[allow(clippy::unnecessary_literal_unwrap)]`
+
+error: this `unsafe` block is not minimal as it covers statements
+  --> tests/ui/minimal_unsafe_block.rs:35:5
+   |
+LL | /     unsafe {
+LL | |
+LL | |         let y = unsafe_fn(0);
+LL | |     };
+   | |_____^
+
+error: this `unsafe` block is not minimal as it covers statements
+  --> tests/ui/minimal_unsafe_block.rs:40:5
+   |
+LL | /     unsafe {
+LL | |
+LL | |         unsafe_fn(0);
+LL | |     };
+   | |_____^
+
+error: this `unsafe` block is not minimal as it covers unnecessarily an array
+  --> tests/ui/minimal_unsafe_block.rs:49:13
+   |
+LL |     let x = unsafe { [unsafe_fn(0)] };
+   |             ^^^^^^^^^^^^^^^^^^^^^^^^^
+
+error: this `unsafe` block is not minimal as it covers unnecessarily a block
+  --> tests/ui/minimal_unsafe_block.rs:56:5
+   |
+LL | /     unsafe {
+LL | |
+LL | |         {
+LL | |             unsafe_fn(0);
+LL | |         }
+LL | |     };
+   | |_____^
+
+error: this `unsafe` block is not minimal as it covers unnecessarily a block
+  --> tests/ui/minimal_unsafe_block.rs:63:5
+   |
+LL | /     unsafe {
+LL | |
+LL | |         unsafe { unsafe_fn(0) }
+LL | |     };
+   | |_____^
+
+error: this `unsafe` block is not minimal as it covers unnecessarily a closure
+  --> tests/ui/minimal_unsafe_block.rs:70:13
+   |
+LL |     let c = unsafe { |x: usize| unsafe_fn(x) };
+   |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+error: this `unsafe` block is not minimal as it covers unnecessarily an `if` block
+  --> tests/ui/minimal_unsafe_block.rs:77:5
+   |
+LL | /     unsafe {
+LL | |
+LL | |         if unsafe_fn(0) == 0 { safe_fn(0) } else { safe_fn(0) }
+LL | |     };
+   | |_____^
+
+error: this `if` has identical blocks
+  --> tests/ui/minimal_unsafe_block.rs:79:30
+   |
+LL |         if unsafe_fn(0) == 0 { safe_fn(0) } else { safe_fn(0) }
+   |                              ^^^^^^^^^^^^^^
+   |
+note: same as this
+  --> tests/ui/minimal_unsafe_block.rs:79:50
+   |
+LL |         if unsafe_fn(0) == 0 { safe_fn(0) } else { safe_fn(0) }
+   |                                                  ^^^^^^^^^^^^^^
+   = note: `-D clippy::if-same-then-else` implied by `-D warnings`
+   = help: to override `-D warnings` add `#[allow(clippy::if_same_then_else)]`
+
+error: this `if` has identical blocks
+  --> tests/ui/minimal_unsafe_block.rs:82:37
+   |
+LL |       if unsafe { unsafe_fn(0) } == 0 {
+   |  _____________________________________^
+LL | |         safe_fn(0)
+LL | |     } else {
+   | |_____^
+   |
+note: same as this
+  --> tests/ui/minimal_unsafe_block.rs:84:12
+   |
+LL |       } else {
+   |  ____________^
+LL | |         safe_fn(0)
+LL | |     };
+   | |_____^
+
+error: this `unsafe` block is not minimal as it covers unnecessarily a `loop` block
+  --> tests/ui/minimal_unsafe_block.rs:90:5
+   |
+LL | /     unsafe {
+LL | |
+LL | |         loop {
+LL | |             unsafe_fn(0);
+...  |
+LL | |     };
+   | |_____^
+
+error: this loop never actually loops
+  --> tests/ui/minimal_unsafe_block.rs:92:9
+   |
+LL | /         loop {
+LL | |             unsafe_fn(0);
+LL | |             break;
+LL | |         }
+   | |_________^
+   |
+   = note: `#[deny(clippy::never_loop)]` on by default
+
+error: this loop never actually loops
+  --> tests/ui/minimal_unsafe_block.rs:98:5
+   |
+LL | /     loop {
+LL | |         unsafe { unsafe_fn(0) };
+LL | |         break;
+LL | |     }
+   | |_____^
+
+error: this `unsafe` block is not minimal as it covers unnecessarily a tuple
+  --> tests/ui/minimal_unsafe_block.rs:105:13
+   |
+LL |     let x = unsafe { (unsafe_fn(0),) };
+   |             ^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+error: this `unsafe` block is not minimal as it covers unnecessarily a safe call
+  --> tests/ui/minimal_unsafe_block.rs:112:5
+   |
+LL |     unsafe { safe_fn(unsafe_fn(0)) };
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+error: this `unsafe` block is not minimal as it covers unnecessarily a safe call
+  --> tests/ui/minimal_unsafe_block.rs:118:5
+   |
+LL | /     unsafe {
+LL | |
+LL | |         (|x| unsafe_fn(x))(0)
+LL | |     };
+   | |_____^
+
+error: this `unsafe` block is not minimal as it covers unnecessarily a safe method call
+  --> tests/ui/minimal_unsafe_block.rs:128:5
+   |
+LL |     unsafe { (A {}).safe_method().unsafe_method().safe_method() };
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+error: aborting due to 18 previous errors
+
